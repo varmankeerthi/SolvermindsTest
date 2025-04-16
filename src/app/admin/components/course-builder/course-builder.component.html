@@ -1,0 +1,79 @@
+<div>
+    <title class="align-center">Course Builder</title>
+</div>
+
+<!-- ----------------------------------------------------------------------using reactive forms -->
+<form [formGroup]="course" >
+    <div class="MarginTop display-flex gap">
+        <label for="title">Course Title</label>
+        <input id="title" type="text" formControlName="CourseTitle">
+        <label for="desc">Course Description</label>
+        <input id="desc" type="text" formControlName="CourseDesc">
+        <label for="cat" >Course Catagory</label>
+        <input id="cat" type="text" formControlName="CourseCatagory">
+    </div>
+
+    <div class="MarginTop">
+        <button *ngIf="!course.invalid" (click)="submitCourses()">Submit</button>
+    </div>
+
+    <div formArrayName="courses" hidden>
+        <button (click)="AddCourse()">Add</button>
+        @for (course of courses.controls; track $index;let i = $index) {
+            <div>
+                <label for="course - {{i}}">Courses</label>
+                <input id="course-{{i}}" type="text" [formControlName]="i">
+            </div>
+        }
+    </div>
+</form> 
+
+<div class="MarginTop " *ngIf="Courselist.length > 0">
+    <table class="table MarginTop">
+
+        <th class="width-40p">Course title</th>
+        <th class="width-40p">Description</th>
+        <th class="width-10p">Catogory</th>
+        <th class="width-10p">Action</th>
+        <ng-container *ngFor="let cor of Courselist;let i = index">
+            <tr *ngIf="!cor.IsDeleted">
+                <td class="width-10p">{{cor.CourseTitle}}</td>
+                <td class="width-40p">{{cor.CourseDesc}}</td>
+                <td class="width-40p">{{cor.CourseCatagory}}</td>
+                <td class="width-10p">
+                    <div>
+                        <button (click)="Modify(i)">Modify</button> 
+                        <button (click)="Delete(i)">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        </ng-container>
+
+    </table>
+</div>
+<!-- ---------------------------------------------------------using class  -->
+<!-- <div class="MarginTop">
+    <div> -->
+        <!-- <div class="text-end"><button (click)="AddItem()">Add Item</button></div> -->
+    <!-- </div>
+    <table class="table MarginTop">
+
+        <th class="width-40p">Course title</th>
+        <th class="width-40p">Description</th>
+        <th class="width-10p">Catogory</th>
+        <th class="width-10p">Action</th>
+        <tr *ngFor="let course of courses;let i = index">
+            <td class="width-40p"><input type="text" class="width-100p" [(ngModel)]="course.Description"></td>
+            <td class="width-40p"><input type="text" class="width-100p" [(ngModel)]="course.Catagory"></td>
+            <td class="width-10p"><input type="text" class="width-100p" [(ngModel)]="course.Title"></td>
+            <td class="width-10p">
+                <img class="width-100p" src="../../../Assets/trash-solid.svg" alt="Delete"
+                (click)="DeleteItem(i)">
+            </td>
+        </tr> -->
+    <!-- </table> -->
+    <!-- <div class="MarginTop text-end">
+        <button (click)="Cancel()">Cancel</button>
+        <button (click)="Submit()">Submit</button>
+    </div> -->
+<!-- </div> -->

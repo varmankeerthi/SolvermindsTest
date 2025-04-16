@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+.table,th,td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.gap {
+    gap: 8px;
+}
+
+.MarginTop {
+   margin-top: 10px;
+}
+.height-10px {
+   height: 10px;
+}
+.width-10px {
+   width: 10px;
+}
+.text-end {
+    text-align: end;
+}
+
+.width-10p {
+    width: 10%;
+}
+.width-40p {
+    width: 40%;
+}
+.width-40p {
+    width: 40%;
+}
+.width-100p {
+    width: 100%;
+}
+.align-center {
+    text-align: center;
+}
+
+.display-flex {
+    display: flex;
+}

@@ -1,0 +1,36 @@
+<form >
+    <header class="align-center">Enrollment</header>
+        <body>
+            <div class="MarginTop">
+                <label >Search</label>
+                <input type="text">
+            </div>
+    
+    
+            <Div class="MarginTop">
+                @for (item of courses; track $index;let i = $index) {
+                    <div class="MarginTop gab ">
+                        <div>
+                            <label ><b>Title: </b>{{item.CourseTitle}}</label>
+                        </div>
+                        <div>
+                            <label ><b>Catagory: </b>{{item.CourseCatagory}}</label>
+                        </div>
+                        <div>
+                            <label><b>Description</b> </label>
+                        </div>
+                        <div>
+                            <textarea >{{item.CourseDesc}}</textarea>
+                        </div>
+                    </div>
+                    <div *ngIf="!$sharedservice.IsAdmin">
+                        <button *ngIf="item.Enroll == null || item.Enroll == 0" (click)="JoinCourse()">Join Course</button>
+                        <label *ngIf="item.Enroll > 0"></label>
+                    </div>
+                    <hr>
+                }
+    
+            </Div>
+        </body>
+    
+    </form>

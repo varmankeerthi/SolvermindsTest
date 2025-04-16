@@ -1,0 +1,44 @@
+<form [formGroup]="Catalog">
+<header class="align-center">Course catalog</header>
+    <body>
+        <!-- <div class="MarginTop">
+            <label >Search</label>
+            <input type="text">
+        </div> -->
+
+        <div hidden formArrayName="catalogs">
+            <!-- <button (click)="AddCourse()">Add</button> -->
+            @for (course of catalogs.controls; track $index;let i = $index) {
+                <div>
+                    <label for="{{i}}"></label>
+                    <input type="text" [formControlName]="i">
+                </div>
+            }
+        </div>
+
+        <Div class="MarginTop">
+            @for (item of courses; track $index;let i = $index) {
+                <div class="MarginTop gab ">
+                    <div>
+                        <label ><b>Title: </b>{{item.CourseTitle}}</label>
+                    </div>
+                    <div>
+                        <label ><b>Catagory: </b>{{item.CourseCatagory}}</label>
+                    </div>
+                    <div>
+                        <label><b>Description</b> </label>
+                    </div>
+                    <div>
+                        <textarea >{{item.CourseDesc}}</textarea>
+                    </div>
+                </div>
+                <div *ngIf="item.Enroll>0">
+                    <label>Members count : <b>{{item.Enroll}}</b></label>
+                </div>
+                <hr>
+            }
+
+        </Div>
+    </body>
+
+</form>
