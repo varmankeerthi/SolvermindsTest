@@ -40,3 +40,6 @@
 .display-flex {
     display: flex;
 }
+.float-end {
+    float: inline-end;
+}

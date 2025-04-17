@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { SharedService } from './Services/shared.service';
+import { SharedService, User } from './Services/shared.service';
 
 @Component({
   selector: 'app-root',
@@ -37,8 +37,33 @@ export class AppComponent implements OnInit {
       this.$sharedservice.IsLoginSuccess = true;
       this.$sharedservice.IsAdmin = false;
       this.router.navigate(['course/catalog']);
-
     }
+    
+// ------------------------------------------------------
+
+var loggedinUser = this.$sharedservice.users.filter(x=>  x.UserName.toLocaleLowerCase() == this.UserName.toLocaleLowerCase() && x.Password == this.Password);
+
+    if (loggedinUser.length > 0 && loggedinUser[0].UserType == 'Admin') {
+      this.$sharedservice.IsAdmin = true;
+      this.$sharedservice.IsLoginSuccess = true;
+      this.router.navigate(['admin/coursebuilder']);
+    } else if (loggedinUser.length > 0 && loggedinUser[0].UserType == 'User') {
+      this.$sharedservice.IsLoginSuccess = true;
+      this.$sharedservice.IsAdmin = false;
+      this.router.navigate(['course/catalog']);
+    } else {
+      alert('Invalid Credentials.');
+      return;
+    }
+
+    this.UserName = null as any;
+    this.Password = null as any;
+  }
+
+  Logout() {
+    this.$sharedservice.IsAdmin = false;
+    this.$sharedservice.IsLoginSuccess =false;
+    this.router.navigate(['']);
   }
 
 }

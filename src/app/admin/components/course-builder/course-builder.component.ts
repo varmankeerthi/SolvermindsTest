@@ -15,8 +15,9 @@ export class CourseBuilderComponent implements OnInit {
   formbuilder:FormBuilder = inject(FormBuilder);
 
   course = this.formbuilder.group({
-    CourseDesc: ['',[Validators.required,Validators.maxLength(10)]],
+    CourseID:[null as any,[Validators.required,Validators.maxLength(50)]],
     CourseTitle: ['',[Validators.required,Validators.maxLength(15)]],
+    CourseDesc: ['',[Validators.required,Validators.maxLength(50)]],
     CourseCatagory: new FormControl('',Validators.required),
     IsDeleted: new FormControl(false),
     courses: new FormArray([])
@@ -26,8 +27,8 @@ export class CourseBuilderComponent implements OnInit {
   Courselist:Array<Course>=Array<Course>();
 
   constructor () {
-    let mx = this.$sharedservice.calculate(49,78);
-    console.log(mx);
+    // let mx = this.$sharedservice.calculate(49,78);
+    // console.log(mx);
   }
 
   // courses:Array<Course> = Array<Course>();
@@ -40,6 +41,11 @@ export class CourseBuilderComponent implements OnInit {
     //   {Description:'Basic of Styles, Types and reusability',Catagory:'FrontEnd',Title:'CSS',IsDelete:false},
     //   {Description:'Dot net core API',Catagory:'',Title:'',IsDelete:false}    
     // ];
+
+    if(!this.course.value.CourseID) {
+      let cid=this.$sharedservice.GenerateRandomNumber(1,50);
+      this.course.controls.CourseID.setValue(cid)
+    }
 
   }
 
@@ -95,6 +101,10 @@ export class CourseBuilderComponent implements OnInit {
     //   courses : []
     // })
     // this.courses.push(co);
+    // if(!this.course.value.CourseID) {
+    //   let cid=this.$sharedservice.GenerateRandomNumber(1,50);
+    //   this.course.controls.CourseID.setValue(cid)
+    // }
 
     this.$sharedservice.UpdateCourseList(this.course.value,this.opttomodi)
     // this.Courselist = JSON.parse(JSON.stringify(this.$sharedservice.GetCourselist()));

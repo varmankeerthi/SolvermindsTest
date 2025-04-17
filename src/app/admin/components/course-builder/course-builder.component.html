@@ -5,16 +5,24 @@
 <!-- ----------------------------------------------------------------------using reactive forms -->
 <form [formGroup]="course" >
     <div class="MarginTop display-flex gap">
+        <label hidden for="cid" >Course ID</label>
+        <input hidden id="cid" type="text" formControlName="CourseID">
+
         <label for="title">Course Title</label>
         <input id="title" type="text" formControlName="CourseTitle">
+        <span></span>
         <label for="desc">Course Description</label>
         <input id="desc" type="text" formControlName="CourseDesc">
+        
         <label for="cat" >Course Catagory</label>
         <input id="cat" type="text" formControlName="CourseCatagory">
+
+        <!-- <button >Upload video</button>
+        <video src=""></video> -->
     </div>
 
     <div class="MarginTop">
-        <button *ngIf="!course.invalid" (click)="submitCourses()">Submit</button>
+        <button [disabled]="course.invalid" (click)="submitCourses()">Submit</button>
     </div>
 
     <div formArrayName="courses" hidden>

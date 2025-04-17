@@ -15,10 +15,14 @@ export class EnrollmentComponent implements OnInit {
   $sharedservice:SharedService = inject(SharedService);
 
   ngOnInit(): void {
+    debugger;
+    this.courses= this.$sharedservice.GetCourselist(); 
+
   }
   
-  JoinCourse() {
-    
+  JoinCourse(course:Course) {
+    debugger;
+    course.Enroll = !course.Enroll ? 1 : course.Enroll + 1;
   }
 
 }
